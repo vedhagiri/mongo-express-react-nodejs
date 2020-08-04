@@ -1,5 +1,6 @@
 .vscode/
 rsc/
-node_modules/
-default.json
 package-lock.json
+node_modules/
+config/production.json
+config/default.json
