@@ -1,2 +1,4 @@
+.vscode/
 rsc/
 node_modules/
+default.json
