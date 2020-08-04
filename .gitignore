@@ -2,3 +2,4 @@
 rsc/
 node_modules/
 default.json
+package-lock.json
