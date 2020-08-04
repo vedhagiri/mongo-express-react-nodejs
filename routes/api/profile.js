@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const request = require('request');
+const config = require('config');
 const auth = require('../../middleware/auth');
 const {
     check,
@@ -332,5 +334,38 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     }
 });
 
+
+// @route GET api/profile/github/:username
+// @desc get gihub repos by username
+// @access Public
+router.get('/github/:username', async (req, res, next) => {
+    try {
+        const options = {
+            uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientID')}&client_secret=${config.get('githubSecretKey')}`,
+            method: 'GET',
+            headers: {
+                'user-agent': 'node.js'
+            }
+        }
+
+        request(options, (err, response, body) => {
+            if (err) console.error(err);
+
+            if (response.statusCode !== 200) {
+                return res.status(400).json({
+                    msg: 'github profile is not available'
+                });
+            }
+
+            res.json(JSON.parse(body));
+
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send("Server Error");
+    }
+
+});
 
 module.exports = router;
