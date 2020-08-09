@@ -167,7 +167,7 @@ const EditProfile = ({profile:{profile, loading}, createProfile, getCurrentProfi
                 </Fragment>}        
             
             <input type="submit" className="btn btn-primary my-1" />
-            <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+            <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
         </form>
         </Fragment>
     )
